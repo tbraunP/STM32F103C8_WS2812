@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pyro/Projekte/STM32F103C8
+CMAKE_SOURCE_DIR = /home/pyro/Projekte/STM32F103/STM32F103C8_WS2812
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pyro/Projekte/STM32F103C8
+CMAKE_BINARY_DIR = /home/pyro/Projekte/STM32F103/STM32F103C8_WS2812
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pyro/Projekte/STM32F103C8/CMakeFiles /home/pyro/Projekte/STM32F103C8/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pyro/Projekte/STM32F103/STM32F103C8_WS2812/CMakeFiles /home/pyro/Projekte/STM32F103/STM32F103C8_WS2812/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pyro/Projekte/STM32F103C8/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pyro/Projekte/STM32F103/STM32F103C8_WS2812/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -102,24 +102,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named stm32f103Demo.elf
+# Target rules for targets named stm32f103WS2812.elf
 
 # Build rule for target.
-stm32f103Demo.elf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 stm32f103Demo.elf
-.PHONY : stm32f103Demo.elf
+stm32f103WS2812.elf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 stm32f103WS2812.elf
+.PHONY : stm32f103WS2812.elf
 
 # fast build rule for target.
-stm32f103Demo.elf/fast:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/build
-.PHONY : stm32f103Demo.elf/fast
+stm32f103WS2812.elf/fast:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/build
+.PHONY : stm32f103WS2812.elf/fast
 
 lib/CMSIS/core_cm3.o: lib/CMSIS/core_cm3.c.o
 .PHONY : lib/CMSIS/core_cm3.o
 
 # target to build an object file
 lib/CMSIS/core_cm3.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/core_cm3.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/core_cm3.c.o
 .PHONY : lib/CMSIS/core_cm3.c.o
 
 lib/CMSIS/core_cm3.i: lib/CMSIS/core_cm3.c.i
@@ -127,7 +127,7 @@ lib/CMSIS/core_cm3.i: lib/CMSIS/core_cm3.c.i
 
 # target to preprocess a source file
 lib/CMSIS/core_cm3.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/core_cm3.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/core_cm3.c.i
 .PHONY : lib/CMSIS/core_cm3.c.i
 
 lib/CMSIS/core_cm3.s: lib/CMSIS/core_cm3.c.s
@@ -135,7 +135,7 @@ lib/CMSIS/core_cm3.s: lib/CMSIS/core_cm3.c.s
 
 # target to generate assembly for a file
 lib/CMSIS/core_cm3.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/core_cm3.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/core_cm3.c.s
 .PHONY : lib/CMSIS/core_cm3.c.s
 
 lib/CMSIS/startup_stm32f10x_md.o: lib/CMSIS/startup_stm32f10x_md.c.o
@@ -143,7 +143,7 @@ lib/CMSIS/startup_stm32f10x_md.o: lib/CMSIS/startup_stm32f10x_md.c.o
 
 # target to build an object file
 lib/CMSIS/startup_stm32f10x_md.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.o
 .PHONY : lib/CMSIS/startup_stm32f10x_md.c.o
 
 lib/CMSIS/startup_stm32f10x_md.i: lib/CMSIS/startup_stm32f10x_md.c.i
@@ -151,7 +151,7 @@ lib/CMSIS/startup_stm32f10x_md.i: lib/CMSIS/startup_stm32f10x_md.c.i
 
 # target to preprocess a source file
 lib/CMSIS/startup_stm32f10x_md.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.i
 .PHONY : lib/CMSIS/startup_stm32f10x_md.c.i
 
 lib/CMSIS/startup_stm32f10x_md.s: lib/CMSIS/startup_stm32f10x_md.c.s
@@ -159,7 +159,7 @@ lib/CMSIS/startup_stm32f10x_md.s: lib/CMSIS/startup_stm32f10x_md.c.s
 
 # target to generate assembly for a file
 lib/CMSIS/startup_stm32f10x_md.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/startup_stm32f10x_md.c.s
 .PHONY : lib/CMSIS/startup_stm32f10x_md.c.s
 
 lib/CMSIS/system_stm32f10x.o: lib/CMSIS/system_stm32f10x.c.o
@@ -167,7 +167,7 @@ lib/CMSIS/system_stm32f10x.o: lib/CMSIS/system_stm32f10x.c.o
 
 # target to build an object file
 lib/CMSIS/system_stm32f10x.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/system_stm32f10x.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/system_stm32f10x.c.o
 .PHONY : lib/CMSIS/system_stm32f10x.c.o
 
 lib/CMSIS/system_stm32f10x.i: lib/CMSIS/system_stm32f10x.c.i
@@ -175,7 +175,7 @@ lib/CMSIS/system_stm32f10x.i: lib/CMSIS/system_stm32f10x.c.i
 
 # target to preprocess a source file
 lib/CMSIS/system_stm32f10x.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/system_stm32f10x.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/system_stm32f10x.c.i
 .PHONY : lib/CMSIS/system_stm32f10x.c.i
 
 lib/CMSIS/system_stm32f10x.s: lib/CMSIS/system_stm32f10x.c.s
@@ -183,7 +183,7 @@ lib/CMSIS/system_stm32f10x.s: lib/CMSIS/system_stm32f10x.c.s
 
 # target to generate assembly for a file
 lib/CMSIS/system_stm32f10x.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/CMSIS/system_stm32f10x.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/CMSIS/system_stm32f10x.c.s
 .PHONY : lib/CMSIS/system_stm32f10x.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/misc.o: lib/STM32F10x_StdPeriph_Driver/src/misc.c.o
@@ -191,7 +191,7 @@ lib/STM32F10x_StdPeriph_Driver/src/misc.o: lib/STM32F10x_StdPeriph_Driver/src/mi
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/misc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/misc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/misc.i: lib/STM32F10x_StdPeriph_Driver/src/misc.c.i
@@ -199,7 +199,7 @@ lib/STM32F10x_StdPeriph_Driver/src/misc.i: lib/STM32F10x_StdPeriph_Driver/src/mi
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/misc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/misc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/misc.s: lib/STM32F10x_StdPeriph_Driver/src/misc.c.s
@@ -207,7 +207,7 @@ lib/STM32F10x_StdPeriph_Driver/src/misc.s: lib/STM32F10x_StdPeriph_Driver/src/mi
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/misc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/misc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/misc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.o
@@ -215,7 +215,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.i
@@ -223,7 +223,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.s
@@ -231,7 +231,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.o
@@ -239,7 +239,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.i
@@ -247,7 +247,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.s
@@ -255,7 +255,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.o
@@ -263,7 +263,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.i
@@ -271,7 +271,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.s
@@ -279,7 +279,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.o
@@ -287,7 +287,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.i
@@ -295,7 +295,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.s
@@ -303,7 +303,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.o
@@ -311,7 +311,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.i
@@ -319,7 +319,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.s
@@ -327,7 +327,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.o
@@ -335,7 +335,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.i
@@ -343,7 +343,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.s
@@ -351,7 +351,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.o
@@ -359,7 +359,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.o: lib/STM32F10x_StdPeriph_D
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.i
@@ -367,7 +367,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.i: lib/STM32F10x_StdPeriph_D
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.s
@@ -375,7 +375,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.s: lib/STM32F10x_StdPeriph_D
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.o
@@ -383,7 +383,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.i
@@ -391,7 +391,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.s
@@ -399,7 +399,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.o
@@ -407,7 +407,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.i
@@ -415,7 +415,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.s
@@ -423,7 +423,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.o
@@ -431,7 +431,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.o: lib/STM32F10x_StdPeriph_Dr
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.i
@@ -439,7 +439,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.i: lib/STM32F10x_StdPeriph_Dr
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.s
@@ -447,7 +447,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.s: lib/STM32F10x_StdPeriph_Dr
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.o
@@ -455,7 +455,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.i
@@ -463,7 +463,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.s
@@ -471,7 +471,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.o
@@ -479,7 +479,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.i
@@ -487,7 +487,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.s
@@ -495,7 +495,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.o
@@ -503,7 +503,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.i
@@ -511,7 +511,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.s
@@ -519,7 +519,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.o
@@ -527,7 +527,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.i
@@ -535,7 +535,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.s
@@ -543,7 +543,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.o
@@ -551,7 +551,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.i
@@ -559,7 +559,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.s
@@ -567,7 +567,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.o
@@ -575,7 +575,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.i
@@ -583,7 +583,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.s
@@ -591,7 +591,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.o
@@ -599,7 +599,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.i
@@ -607,7 +607,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.s
@@ -615,7 +615,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.o
@@ -623,7 +623,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.i
@@ -631,7 +631,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.s
@@ -639,7 +639,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.o
@@ -647,7 +647,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.i
@@ -655,7 +655,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.s
@@ -663,7 +663,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.o
@@ -671,7 +671,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.o: lib/STM32F10x_StdPeriph_Driv
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.i
@@ -679,7 +679,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.i: lib/STM32F10x_StdPeriph_Driv
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.s
@@ -687,7 +687,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.s: lib/STM32F10x_StdPeriph_Driv
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.o
@@ -695,7 +695,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.o: lib/STM32F10x_StdPeriph_Dr
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.i
@@ -703,7 +703,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.i: lib/STM32F10x_StdPeriph_Dr
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.s
@@ -711,7 +711,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.s: lib/STM32F10x_StdPeriph_Dr
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c.s
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.o: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.o
@@ -719,7 +719,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.o: lib/STM32F10x_StdPeriph_Dri
 
 # target to build an object file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.o
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.o
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.i: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.i
@@ -727,7 +727,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.i: lib/STM32F10x_StdPeriph_Dri
 
 # target to preprocess a source file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.i
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.i
 
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.s: lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.s
@@ -735,7 +735,7 @@ lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.s: lib/STM32F10x_StdPeriph_Dri
 
 # target to generate assembly for a file
 lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.s
 .PHONY : lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c.s
 
 lib/syscalls/syscalls.o: lib/syscalls/syscalls.c.o
@@ -743,7 +743,7 @@ lib/syscalls/syscalls.o: lib/syscalls/syscalls.c.o
 
 # target to build an object file
 lib/syscalls/syscalls.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/syscalls/syscalls.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/syscalls/syscalls.c.o
 .PHONY : lib/syscalls/syscalls.c.o
 
 lib/syscalls/syscalls.i: lib/syscalls/syscalls.c.i
@@ -751,7 +751,7 @@ lib/syscalls/syscalls.i: lib/syscalls/syscalls.c.i
 
 # target to preprocess a source file
 lib/syscalls/syscalls.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/syscalls/syscalls.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/syscalls/syscalls.c.i
 .PHONY : lib/syscalls/syscalls.c.i
 
 lib/syscalls/syscalls.s: lib/syscalls/syscalls.c.s
@@ -759,15 +759,39 @@ lib/syscalls/syscalls.s: lib/syscalls/syscalls.c.s
 
 # target to generate assembly for a file
 lib/syscalls/syscalls.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/lib/syscalls/syscalls.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/lib/syscalls/syscalls.c.s
 .PHONY : lib/syscalls/syscalls.c.s
+
+src/colors.o: src/colors.c.o
+.PHONY : src/colors.o
+
+# target to build an object file
+src/colors.c.o:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/colors.c.o
+.PHONY : src/colors.c.o
+
+src/colors.i: src/colors.c.i
+.PHONY : src/colors.i
+
+# target to preprocess a source file
+src/colors.c.i:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/colors.c.i
+.PHONY : src/colors.c.i
+
+src/colors.s: src/colors.c.s
+.PHONY : src/colors.s
+
+# target to generate assembly for a file
+src/colors.c.s:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/colors.c.s
+.PHONY : src/colors.c.s
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/main.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/main.c.o
 .PHONY : src/main.c.o
 
 src/main.i: src/main.c.i
@@ -775,7 +799,7 @@ src/main.i: src/main.c.i
 
 # target to preprocess a source file
 src/main.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/main.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/main.c.i
 .PHONY : src/main.c.i
 
 src/main.s: src/main.c.s
@@ -783,7 +807,7 @@ src/main.s: src/main.c.s
 
 # target to generate assembly for a file
 src/main.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/main.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/main.c.s
 .PHONY : src/main.c.s
 
 src/stm32f10x_it.o: src/stm32f10x_it.c.o
@@ -791,7 +815,7 @@ src/stm32f10x_it.o: src/stm32f10x_it.c.o
 
 # target to build an object file
 src/stm32f10x_it.c.o:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/stm32f10x_it.c.o
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/stm32f10x_it.c.o
 .PHONY : src/stm32f10x_it.c.o
 
 src/stm32f10x_it.i: src/stm32f10x_it.c.i
@@ -799,7 +823,7 @@ src/stm32f10x_it.i: src/stm32f10x_it.c.i
 
 # target to preprocess a source file
 src/stm32f10x_it.c.i:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/stm32f10x_it.c.i
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/stm32f10x_it.c.i
 .PHONY : src/stm32f10x_it.c.i
 
 src/stm32f10x_it.s: src/stm32f10x_it.c.s
@@ -807,8 +831,32 @@ src/stm32f10x_it.s: src/stm32f10x_it.c.s
 
 # target to generate assembly for a file
 src/stm32f10x_it.c.s:
-	$(MAKE) -f CMakeFiles/stm32f103Demo.elf.dir/build.make CMakeFiles/stm32f103Demo.elf.dir/src/stm32f10x_it.c.s
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/stm32f10x_it.c.s
 .PHONY : src/stm32f10x_it.c.s
+
+src/ws2812.o: src/ws2812.c.o
+.PHONY : src/ws2812.o
+
+# target to build an object file
+src/ws2812.c.o:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/ws2812.c.o
+.PHONY : src/ws2812.c.o
+
+src/ws2812.i: src/ws2812.c.i
+.PHONY : src/ws2812.i
+
+# target to preprocess a source file
+src/ws2812.c.i:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/ws2812.c.i
+.PHONY : src/ws2812.c.i
+
+src/ws2812.s: src/ws2812.c.s
+.PHONY : src/ws2812.s
+
+# target to generate assembly for a file
+src/ws2812.c.s:
+	$(MAKE) -f CMakeFiles/stm32f103WS2812.elf.dir/build.make CMakeFiles/stm32f103WS2812.elf.dir/src/ws2812.c.s
+.PHONY : src/ws2812.c.s
 
 # Help Target
 help:
@@ -818,7 +866,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... stm32f103Demo.elf"
+	@echo "... stm32f103WS2812.elf"
 	@echo "... lib/CMSIS/core_cm3.o"
 	@echo "... lib/CMSIS/core_cm3.i"
 	@echo "... lib/CMSIS/core_cm3.s"
@@ -900,12 +948,18 @@ help:
 	@echo "... lib/syscalls/syscalls.o"
 	@echo "... lib/syscalls/syscalls.i"
 	@echo "... lib/syscalls/syscalls.s"
+	@echo "... src/colors.o"
+	@echo "... src/colors.i"
+	@echo "... src/colors.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/stm32f10x_it.o"
 	@echo "... src/stm32f10x_it.i"
 	@echo "... src/stm32f10x_it.s"
+	@echo "... src/ws2812.o"
+	@echo "... src/ws2812.i"
+	@echo "... src/ws2812.s"
 .PHONY : help
 
 

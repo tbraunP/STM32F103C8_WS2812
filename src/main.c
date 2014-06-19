@@ -3,30 +3,40 @@
 #include "stm32f10x_conf.h"
 #include "system_stm32f10x.h"
 
+#include "ws2812.h"
+#include "colors.h"
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-static GPIO_InitTypeDef GPIO_InitStructure;
 
-int main(void)
-{
+void Delay(uint32_t delay) {
+	for (uint32_t i; i < delay; i++)
+		;
+}
 
-      /* GPIOD Periph clock enable */
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+int main(void) {
 
-    /* Configure pins in output pushpull mode */
-    GPIO_StructInit(&GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-  
-    while(1)
-    {
-      GPIO_SetBits(GPIOA, GPIO_Pin_0);
-      for (int i = 0; i< 4000;i++);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_0);
-      for (int i = 0; i< 4000;i++);
-    }
+	WS2812_Init();
+
+	while (1) {
+		/* first cycle through the colors on 2 LEDs chained together
+		 * last LED in the chain will receive first sent triplet
+		 * --> last LED in the chain will 'lead'
+		 */
+		for (uint16_t i = 0; i < 766; i += 2) {
+			WS2812_send(&eightbit[i], 2);
+			Delay(50000L);
+		}
+
+		/* cycle through the colors on only one LED
+		 * this time only the first LED that data is
+		 * fed into will update
+		 */
+		for (uint16_t i = 0; i < 766; i += 1) {
+			WS2812_send(&eightbit[i], 1);
+			Delay(50000L);
+		}
+	}
 }
