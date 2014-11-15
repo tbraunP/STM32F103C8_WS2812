@@ -150,12 +150,12 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	}
 
 // add needed delay at end of byte cycle, pulsewidth = 0
-	while (memaddr < buffersize) {
+	while (memaddr < LEDBUFFSIZE) {
 		ledBuffer[memaddr] = 0;
 		memaddr++;
 	}
 
-	DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
+	//DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
 	DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
 	TIM_Cmd(TIM3, ENABLE); // enable Timer 3
 
@@ -163,7 +163,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 }
 
 void DMA1_Channel6_IRQHandler() {
-	TIM_Cmd(TIM3, DISABLE);
+	//TIM_Cmd(TIM3, DISABLE);
 	DMA_Cmd(DMA1_Channel6, DISABLE);
 	DMA_ClearFlag(DMA1_FLAG_TC6);
 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
