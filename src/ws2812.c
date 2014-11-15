@@ -163,7 +163,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 }
 
 void DMA1_Channel6_IRQHandler() {
-	//TIM_Cmd(TIM3, DISABLE);
+	TIM_Cmd(TIM3, DISABLE);
 	DMA_Cmd(DMA1_Channel6, DISABLE);
 	DMA_ClearFlag(DMA1_FLAG_TC6);
 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
