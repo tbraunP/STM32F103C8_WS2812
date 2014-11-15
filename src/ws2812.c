@@ -15,8 +15,8 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LED (120)
-#define LEDBUFFSIZE (3*LED + 42)
+#define LED (60)
+#define LEDBUFFSIZE (3 * 8 * LED + 60)
 static uint16_t ledBuffer[LEDBUFFSIZE];
 
 #define PERIODE		(31)
@@ -105,7 +105,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	while (transferRunning)
 		;
 
-	uint32_t buffersize = (len * 24) + 42; // number of bytes needed is #LEDs * 24 bytes + 42 trailing bytes
+	uint32_t buffersize = (len * 8 * 3) + 42; // number of bytes needed is #LEDs * 24 bytes + 42 trailing bytes
 	uint32_t memaddr = 0;	// reset buffer memory index
 	uint32_t led = 0;	// reset led index
 

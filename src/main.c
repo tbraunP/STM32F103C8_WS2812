@@ -19,7 +19,15 @@ void Delay(uint32_t delay) {
 int main(void) {
 
 	WS2812_Init();
+	
+	Delay(50000L);
 
+	WS2812_send(&eightbit[0], 60);
+	
+	while(1){
+	  Delay(50000L);
+	}
+	
 	while (1) {
 		/* first cycle through the colors on 2 LEDs chained together
 		 * last LED in the chain will receive first sent triplet
