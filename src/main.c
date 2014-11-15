@@ -26,7 +26,7 @@ int main(void) {
 		 * --> last LED in the chain will 'lead'
 		 */
 		for (uint16_t i = 0; i < 766; i += 2) {
-			WS2812_send(&eightbit[i], 2);
+			WS2812_send(&eightbit[i], 60);
 			Delay(50000L);
 		}
 
@@ -35,7 +35,7 @@ int main(void) {
 		 * fed into will update
 		 */
 		for (uint16_t i = 0; i < 766; i += 1) {
-			WS2812_send(&eightbit[i], 1);
+			WS2812_send(&eightbit[i], 60);
 			Delay(50000L);
 		}
 	}

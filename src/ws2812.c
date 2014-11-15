@@ -15,12 +15,13 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LED (1)
+#define LED (120)
 #define LEDBUFFSIZE (3*LED + 42)
 static uint16_t ledBuffer[LEDBUFFSIZE];
 
-#define LOGIC_ONE ((uint16_t) (17))
-#define LOGIC_ZERO ((uint16_t) (9))
+#define PERIODE		(31)
+#define LOGIC_ONE ((uint16_t) (21))
+#define LOGIC_ZERO ((uint16_t) (13))
 
 void WS2812_Init() {
 	GPIO_InitTypeDef gpioConfig;
@@ -41,7 +42,7 @@ void WS2812_Init() {
 	/* Compute the prescaler value for 24 MHz -> 30 * 24 MHz = 1,25 us */
 	uint16_t prescaler = (uint16_t) (SystemCoreClock / 24000000) - 1;
 	/* Time base configuration */
-	timConfig.TIM_Period = (30 - 1); // 800kHz
+	timConfig.TIM_Period = (PERIODE - 1); // 800kHz
 	timConfig.TIM_Prescaler = prescaler;
 	timConfig.TIM_ClockDivision = 0;
 	timConfig.TIM_CounterMode = TIM_CounterMode_Up;
@@ -53,6 +54,7 @@ void WS2812_Init() {
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_Pulse = 0;
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+	//TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
 	TIM_OC1Init(TIM3, &TIM_OCInitStructure);
 
 	// Configure dma
@@ -103,17 +105,17 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	while (transferRunning)
 		;
 
-	uint16_t buffersize = (len * 24) + 42; // number of bytes needed is #LEDs * 24 bytes + 42 trailing bytes
-	uint16_t memaddr = 0;	// reset buffer memory index
-	uint8_t led = 0;	// reset led index
+	uint32_t buffersize = (len * 24) + 42; // number of bytes needed is #LEDs * 24 bytes + 42 trailing bytes
+	uint32_t memaddr = 0;	// reset buffer memory index
+	uint32_t led = 0;	// reset led index
 
 // fill transmit buffer with correct compare values to achieve
 // correct pulse widths according to color values
 	while (len) {
-		for (uint8_t j = 0; j < 8; j++)	// GREEN data
-				{
+		for (uint32_t j = 0; j < 8; j++)	// GREEN data
+		{
 			if ((color[led][1] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
-					{
+			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
 				ledBuffer[memaddr] = LOGIC_ZERO;	// compare value for logical 0
@@ -121,10 +123,10 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 			memaddr++;
 		}
 
-		for (uint8_t j = 0; j < 8; j++)	// RED data
-				{
+		for (uint32_t j = 0; j < 8; j++)	// RED data
+		{
 			if ((color[led][0] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
-					{
+			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
 				ledBuffer[memaddr] = LOGIC_ZERO;	// compare value for logical 0
@@ -132,10 +134,10 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 			memaddr++;
 		}
 
-		for (uint8_t j = 0; j < 8; j++)	// BLUE data
-				{
+		for (uint32_t j = 0; j < 8; j++)	// BLUE data
+		{
 			if ((color[led][2] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
-					{
+			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
 				ledBuffer[memaddr] = LOGIC_ZERO;	// compare value for logical 0
