@@ -22,7 +22,7 @@ int main(void) {
 	
 	Delay(50000L);
 
-	WS2812_send(&eightbit[0], 60);
+	WS2812_send(eightbit, 1);
 	
 	while(1){
 	  Delay(50000L);
