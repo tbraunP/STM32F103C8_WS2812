@@ -13,7 +13,7 @@
 
 void Delay(uint32_t delay) {
 	for (uint32_t i; i < delay; i++)
-		;
+        asm_volatile("NOP");
 }
 
 int main(void) {
