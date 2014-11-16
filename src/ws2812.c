@@ -79,7 +79,7 @@ void WS2812_Init() {
 	// DMA config
 	dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
 	dmaConfig.DMA_BufferSize = LEDBUFFSIZE;
-	DMA_Init(DMA1_Channel6, &dmaConfig);
+    DMA_Init(DMA1_Channel6, &dmaConfig);
 
 	/* TIM3 CC1 DMA Request enable */
 	TIM_DMACmd(TIM3, TIM_DMA_CC1, ENABLE);
@@ -90,6 +90,8 @@ void WS2812_Init() {
 
 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
 	NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+
+    transferRunning = false;
 }
 
 /* This function sends data bytes out to a string of WS2812s
@@ -100,7 +102,7 @@ void WS2812_Init() {
  * the LED that is the furthest away from the controller (the point where
  * data is injected into the chain)
  */
-void WS2812_send(uint8_t (*color)[3], uint16_t len) {
+void WS2812_send(uint16_t (*color)[3], uint16_t len) {
 	// wait for running transfers
 	while (transferRunning)
 		;
@@ -149,11 +151,11 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	}
 
     // deactivate remaining leds
-    for(; led < LED; led++){
-        ledBuffer[memaddr++] = LOGIC_ZERO;
-        ledBuffer[memaddr++] = LOGIC_ZERO;
-        ledBuffer[memaddr++] = LOGIC_ZERO;
-    }
+//    for(; led < LED; led++){
+//        ledBuffer[memaddr++] = LOGIC_ZERO;
+//        ledBuffer[memaddr++] = LOGIC_ZERO;
+//        ledBuffer[memaddr++] = LOGIC_ZERO;
+//    }
 
     // add needed delay at end of byte cycle, pulsewidth = 0
     for(; memaddr < LEDBUFFSIZE; memaddr++){
@@ -161,15 +163,18 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	}
 
 	//DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
-	DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
-	TIM_Cmd(TIM3, ENABLE); // enable Timer 3
+    transferRunning = true;
 
-	transferRunning = true;
+    // DMA (needed to be reintialized -> NO DEINIT!!)
+    DMA_Init(DMA1_Channel6, &dmaConfig);
+	DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
+
+	TIM_Cmd(TIM3, ENABLE); // enable Timer 3
 }
 
 void DMA1_Channel6_IRQHandler() {
+    DMA_Cmd(DMA1_Channel6, DISABLE);
     TIM_Cmd(TIM3, DISABLE);
-	DMA_Cmd(DMA1_Channel6, DISABLE);
 	DMA_ClearFlag(DMA1_FLAG_TC6);
 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
 	transferRunning = false;

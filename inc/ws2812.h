@@ -18,7 +18,7 @@
 
 void WS2812_Init();
 
-void WS2812_send(uint8_t (*color)[3], uint16_t len);
+void WS2812_send(uint16_t (*color)[3], uint16_t len);
 
 void DMA1_Channel6_IRQHandler();
 
