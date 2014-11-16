@@ -8,6 +8,7 @@
 #ifndef WS2812_H_
 #define WS2812_H_
 #include <stdint.h>
+#include "colors.h"
 
 
 #ifdef __cplusplus
@@ -18,7 +19,7 @@
 
 void WS2812_Init();
 
-void WS2812_send(uint16_t (*color)[3], uint16_t len);
+void WS2812_send(RGB_T* color, uint16_t leds);
 
 void DMA1_Channel6_IRQHandler();
 

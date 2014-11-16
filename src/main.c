@@ -17,21 +17,25 @@ void Delay(uint32_t delay) {
     }
 }
 
-static uint16_t stripe[LED][3];
+static RGB_T stripe[LED];
+static RGB_T clear[LED];
 
 int main(void) {
 
     // clear stripe
     for(uint16_t i = 0; i < LED; i++){
-        stripe[i][0] = 0;
-        stripe[i][1] = 0;
-        stripe[i][2] = 0;
+        stripe[i].blue = 0;
+        stripe[i].green = 0;
+        stripe[i].red = 0;
+        clear[i].blue = 0;
+        clear[i].red = 0;
+        clear[i].green = 0;
     }
 
 
     WS2812_Init();
 
-    WS2812_send(stripe, 60);
+    WS2812_send(clear, LED);
 
     Delay(5000000L);
 
@@ -39,16 +43,19 @@ int main(void) {
         for(uint16_t j = 0; j < LED; j++){
             // wandering light
             for(uint16_t i = 0; i < LED; i++){
-                stripe[i][0] = 0;
-                stripe[i][1] = 0;
-                stripe[i][2] = 0;
+                stripe[i].blue = 0;
+                stripe[i].green = 0;
+                stripe[i].red = 0;
             }
-            stripe[j][0] = 0;
-            stripe[j][1] = 0;
-            stripe[j][2] = 255;
+            stripe[j].blue = 255;
+            stripe[j].green = 255;
+            stripe[j].red = 255;
+
+            WS2812_send(clear, LED);
+            WS2812_send(clear, LED);
 
             WS2812_send(stripe, LED);
-            Delay(500000L);
+            Delay(750000L);
         }
     }
 

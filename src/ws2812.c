@@ -15,7 +15,7 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 80))
+#define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 50))
 static uint8_t ledBuffer[LEDBUFFSIZE];
 
 
@@ -109,7 +109,7 @@ void WS2812_Init() {
  * the LED that is the furthest away from the controller (the point where
  * data is injected into the chain)
  */
-void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
+void WS2812_send(RGB_T* color, uint16_t leds) {
     // wait for running transfers
     while (transferRunning)
         ;
@@ -121,7 +121,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
     for(uint16_t i=0; i < leds; i++) {
         for (uint8_t j = 0; j < 8; j++)	// GREEN data
         {
-            if ((color[i][1] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i].green << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
             {
                 ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
             } else {
@@ -132,7 +132,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
 
         for (uint8_t j = 0; j < 8; j++)	// RED data
         {
-            if ((color[i][0] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i].red << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
             {
                 ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
             } else {
@@ -143,7 +143,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
 
         for (uint8_t j = 0; j < 8; j++)	// BLUE data
         {
-            if ((color[i][2] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i].blue << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
             {
                 ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
             } else {
@@ -154,7 +154,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
     }
 
     // deactivate remaining leds
-    for(uint16_t j = leds+1; j < LED; j++){
+    for(uint16_t j = leds; j < LED; j++){
         ledBuffer[memaddr++] = LOGIC_ZERO;
         ledBuffer[memaddr++] = LOGIC_ZERO;
         ledBuffer[memaddr++] = LOGIC_ZERO;
