@@ -15,14 +15,14 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LEDBUFFSIZE (3 * 8 * LED + 70)
-static uint8_t ledBuffer[LEDBUFFSIZE];
+#define LEDBUFFSIZE (3 * 8 * LED + 80)
+uint8_t ledBuffer[LEDBUFFSIZE];
 
 
 // Timing Definitions
 #define PERIODE		(31)
-#define LOGIC_ONE ((uint16_t) (21))
-#define LOGIC_ZERO ((uint16_t) (13))
+#define LOGIC_ONE ((uint16_t) (20))
+#define LOGIC_ZERO ((uint16_t) (10))
 
 
 void WS2812_Init() {
@@ -32,7 +32,7 @@ void WS2812_Init() {
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_StructInit(&gpioConfig);
-	gpioConfig.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    gpioConfig.GPIO_Pin = GPIO_Pin_6;
 	gpioConfig.GPIO_Mode = GPIO_Mode_AF_PP;
 	gpioConfig.GPIO_Speed = GPIO_Speed_50MHz;
 
@@ -54,9 +54,9 @@ void WS2812_Init() {
 	TIM_OCStructInit(&TIM_OCInitStructure);
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 0;
+    //TIM_OCInitStructure.TIM_Pulse = 0;
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-	//TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
+    //TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
 	TIM_OC1Init(TIM3, &TIM_OCInitStructure);
 
 	// Configure dma
@@ -67,13 +67,11 @@ void WS2812_Init() {
 
 	DMA_StructInit(&dmaConfig);
 	dmaConfig.DMA_PeripheralBaseAddr = (uint32_t) &(TIM3->CCR1);
-	//dmaConfig.DMA_MemoryBaseAddr = NULL;
 	dmaConfig.DMA_DIR = DMA_DIR_PeripheralDST;
-	//dmaConfig.DMA_BufferSize = dataSize;
 	dmaConfig.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	dmaConfig.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-	dmaConfig.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+    dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
+    dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
 	dmaConfig.DMA_Mode = DMA_Mode_Normal;
 	dmaConfig.DMA_Priority = DMA_Priority_Medium;
 	dmaConfig.DMA_M2M = DMA_M2M_Disable;
