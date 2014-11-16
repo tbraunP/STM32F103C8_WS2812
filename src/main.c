@@ -12,20 +12,30 @@
 
 
 void Delay(uint32_t delay) {
-    for (uint32_t i; i < delay; i++)
-        asm_volatile("NOP");
+    for (uint32_t i; i < delay; i++){
+        __asm__ volatile("NOP");
+    }
 }
 
+static uint8_t stripe[LED][3];
+
 int main(void) {
+
+    // clear stripe
+    for(uint16_t i = 0; i < LED; i++){
+        stripe[i][0] = 0;
+        stripe[i][1] = 0;
+        stripe[i][2] = 0;
+    }
+
 
 	WS2812_Init();
 	
 	Delay(50000L);
-
-	WS2812_send(eightbit, 1);
 	
 	while(1){
-	  Delay(50000L);
+      WS2812_send(stripe, LED);
+      Delay(500000L);
 	}
 	
 	while (1) {

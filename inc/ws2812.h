@@ -14,6 +14,8 @@
  extern "C" {
 #endif
 
+#define LED (60)
+
 void WS2812_Init();
 
 void WS2812_send(uint8_t (*color)[3], uint16_t len);

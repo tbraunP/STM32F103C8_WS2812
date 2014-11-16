@@ -10,8 +10,14 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 extern uint8_t eightbit[766][3];
 
-
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* COLORS_H_ */

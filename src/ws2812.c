@@ -15,13 +15,15 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LED (60)
-#define LEDBUFFSIZE (3 * 8 * LED + 60)
-static uint16_t ledBuffer[LEDBUFFSIZE];
+#define LEDBUFFSIZE (3 * 8 * LED + 70)
+static uint8_t ledBuffer[LEDBUFFSIZE];
 
+
+// Timing Definitions
 #define PERIODE		(31)
 #define LOGIC_ONE ((uint16_t) (21))
 #define LOGIC_ZERO ((uint16_t) (13))
+
 
 void WS2812_Init() {
 	GPIO_InitTypeDef gpioConfig;
@@ -105,12 +107,11 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 	while (transferRunning)
 		;
 
-	uint32_t buffersize = (len * 8 * 3) + 42; // number of bytes needed is #LEDs * 24 bytes + 42 trailing bytes
 	uint32_t memaddr = 0;	// reset buffer memory index
 	uint32_t led = 0;	// reset led index
 
-// fill transmit buffer with correct compare values to achieve
-// correct pulse widths according to color values
+    // fill transmit buffer with correct compare values to achieve
+    // correct pulse widths according to color values
 	while (len) {
 		for (uint32_t j = 0; j < 8; j++)	// GREEN data
 		{
@@ -149,10 +150,16 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 		len--;
 	}
 
-// add needed delay at end of byte cycle, pulsewidth = 0
-	while (memaddr < LEDBUFFSIZE) {
+    // deactivate remaining leds
+    for(; led < LED; led++){
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+    }
+
+    // add needed delay at end of byte cycle, pulsewidth = 0
+    for(; memaddr < LEDBUFFSIZE; memaddr++){
 		ledBuffer[memaddr] = 0;
-		memaddr++;
 	}
 
 	//DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
