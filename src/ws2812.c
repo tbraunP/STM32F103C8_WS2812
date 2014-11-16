@@ -16,7 +16,7 @@ static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
 #define LEDBUFFSIZE (3 * 8 * LED + 80)
-uint16_t ledBuffer[LEDBUFFSIZE];
+static uint16_t ledBuffer[LEDBUFFSIZE];
 
 
 // Timing Definitions
