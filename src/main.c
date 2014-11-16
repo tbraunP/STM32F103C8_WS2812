@@ -49,18 +49,10 @@ int main(void) {
 
         WS2812_send(stripe, LED);
         Delay(500000L);
-    }
+        }
     }
 
-    //stripe[2][0] = 120;
-    //stripe[2][1] = 120;
-    //stripe[2][2] = 120;
 
-    for(int i=0; i < LED; i+=2){
-        stripe[i][0] = 8;
-        stripe[i][1] = 255;
-        stripe[i][2] = 255;
-    }
 
 
     //stripe[1][1] = 255;
