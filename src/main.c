@@ -17,7 +17,7 @@ void Delay(uint32_t delay) {
     }
 }
 
-static uint8_t stripe[LED][3];
+uint8_t stripe[LED][3];
 
 int main(void) {
 
@@ -33,28 +33,26 @@ int main(void) {
 	
 	Delay(50000L);
 	
-	while(1){
-      WS2812_send(stripe, LED);
-      Delay(500000L);
-	}
-	
-	while (1) {
-		/* first cycle through the colors on 2 LEDs chained together
-		 * last LED in the chain will receive first sent triplet
-		 * --> last LED in the chain will 'lead'
-		 */
-		for (uint16_t i = 0; i < 766; i += 2) {
-			WS2812_send(&eightbit[i], 60);
-			Delay(50000L);
-		}
+    //stripe[2][0] = 120;
+    //stripe[2][1] = 120;
+    //stripe[2][2] = 120;
 
-		/* cycle through the colors on only one LED
-		 * this time only the first LED that data is
-		 * fed into will update
-		 */
-		for (uint16_t i = 0; i < 766; i += 1) {
-			WS2812_send(&eightbit[i], 60);
-			Delay(50000L);
-		}
+
+    stripe[0][0] = 8;
+    stripe[0][1] = 255;
+    stripe[0][2] = 255;
+
+
+    stripe[2][0] = 8;
+    stripe[2][1] = 255;
+    stripe[2][2] = 255;
+
+
+    //stripe[1][1] = 255;
+
+     WS2812_send(stripe, 3);
+
+	while(1){
+      Delay(500000L);
 	}
 }

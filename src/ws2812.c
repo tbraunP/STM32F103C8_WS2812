@@ -16,7 +16,7 @@ static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
 #define LEDBUFFSIZE (3 * 8 * LED + 80)
-uint8_t ledBuffer[LEDBUFFSIZE];
+uint16_t ledBuffer[LEDBUFFSIZE];
 
 
 // Timing Definitions
@@ -52,7 +52,7 @@ void WS2812_Init() {
 
 	/* PWM1 Mode configuration: Channel1 */
 	TIM_OCStructInit(&TIM_OCInitStructure);
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
     //TIM_OCInitStructure.TIM_Pulse = 0;
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
@@ -71,7 +71,7 @@ void WS2812_Init() {
 	dmaConfig.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	dmaConfig.DMA_MemoryInc = DMA_MemoryInc_Enable;
     dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
-    dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+    dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Word;
 	dmaConfig.DMA_Mode = DMA_Mode_Normal;
 	dmaConfig.DMA_Priority = DMA_Priority_Medium;
 	dmaConfig.DMA_M2M = DMA_M2M_Disable;
@@ -111,7 +111,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
     // fill transmit buffer with correct compare values to achieve
     // correct pulse widths according to color values
 	while (len) {
-		for (uint32_t j = 0; j < 8; j++)	// GREEN data
+        for (uint8_t j = 0; j < 8; j++)	// GREEN data
 		{
 			if ((color[led][1] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
@@ -122,7 +122,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 			memaddr++;
 		}
 
-		for (uint32_t j = 0; j < 8; j++)	// RED data
+        for (uint8_t j = 0; j < 8; j++)	// RED data
 		{
 			if ((color[led][0] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
@@ -133,7 +133,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 			memaddr++;
 		}
 
-		for (uint32_t j = 0; j < 8; j++)	// BLUE data
+        for (uint8_t j = 0; j < 8; j++)	// BLUE data
 		{
 			if ((color[led][2] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
@@ -168,7 +168,7 @@ void WS2812_send(uint8_t (*color)[3], uint16_t len) {
 }
 
 void DMA1_Channel6_IRQHandler() {
-	TIM_Cmd(TIM3, DISABLE);
+    TIM_Cmd(TIM3, DISABLE);
 	DMA_Cmd(DMA1_Channel6, DISABLE);
 	DMA_ClearFlag(DMA1_FLAG_TC6);
 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
