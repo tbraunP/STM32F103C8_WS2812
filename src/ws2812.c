@@ -15,8 +15,9 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LEDBUFFSIZE (3 * 8 * LED + 80)
-static uint16_t ledBuffer[LEDBUFFSIZE];
+#define LED (60)
+#define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 80))
+static uint16_t ledBuffer[1600];
 
 
 // Timing Definitions
@@ -26,6 +27,12 @@ static uint16_t ledBuffer[LEDBUFFSIZE];
 
 
 void WS2812_Init() {
+
+    for(int i=0;i<1600;i++){
+        ledBuffer[i]=0;
+    }
+
+
 	GPIO_InitTypeDef gpioConfig;
 	TIM_TimeBaseInitTypeDef timConfig;
 	TIM_OCInitTypeDef TIM_OCInitStructure;
@@ -73,12 +80,12 @@ void WS2812_Init() {
     dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
     dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Word;
 	dmaConfig.DMA_Mode = DMA_Mode_Normal;
-	dmaConfig.DMA_Priority = DMA_Priority_Medium;
+    dmaConfig.DMA_Priority = DMA_Priority_High;
 	dmaConfig.DMA_M2M = DMA_M2M_Disable;
 
 	// DMA config
 	dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
-	dmaConfig.DMA_BufferSize = LEDBUFFSIZE;
+    dmaConfig.DMA_BufferSize = (uint32_t) 1600;
     DMA_Init(DMA1_Channel6, &dmaConfig);
 
 	/* TIM3 CC1 DMA Request enable */
@@ -102,20 +109,19 @@ void WS2812_Init() {
  * the LED that is the furthest away from the controller (the point where
  * data is injected into the chain)
  */
-void WS2812_send(uint16_t (*color)[3], uint16_t len) {
+void WS2812_send(uint16_t (*color)[3], uint16_t leds) {
 	// wait for running transfers
 	while (transferRunning)
 		;
 
 	uint32_t memaddr = 0;	// reset buffer memory index
-	uint32_t led = 0;	// reset led index
 
     // fill transmit buffer with correct compare values to achieve
     // correct pulse widths according to color values
-	while (len) {
+    for(uint16_t i=0; i < leds; i++) {
         for (uint8_t j = 0; j < 8; j++)	// GREEN data
 		{
-			if ((color[led][1] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i][1] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
@@ -126,7 +132,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t len) {
 
         for (uint8_t j = 0; j < 8; j++)	// RED data
 		{
-			if ((color[led][0] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i][0] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
@@ -137,7 +143,7 @@ void WS2812_send(uint16_t (*color)[3], uint16_t len) {
 
         for (uint8_t j = 0; j < 8; j++)	// BLUE data
 		{
-			if ((color[led][2] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
+            if ((color[i][2] << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
 			{
 				ledBuffer[memaddr] = LOGIC_ONE; // compare value for logical 1
 			} else {
@@ -145,27 +151,32 @@ void WS2812_send(uint16_t (*color)[3], uint16_t len) {
 			}
 			memaddr++;
 		}
-
-		led++;
-		len--;
 	}
 
-    // deactivate remaining leds
-//    for(; led < LED; led++){
-//        ledBuffer[memaddr++] = LOGIC_ZERO;
-//        ledBuffer[memaddr++] = LOGIC_ZERO;
-//        ledBuffer[memaddr++] = LOGIC_ZERO;
-//    }
+//    // deactivate remaining leds
+    for(uint16_t j = leds; j < LED; j++){
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+        ledBuffer[memaddr++] = LOGIC_ZERO;
+    }
 
-    // add needed delay at end of byte cycle, pulsewidth = 0
-    for(; memaddr < LEDBUFFSIZE; memaddr++){
-		ledBuffer[memaddr] = 0;
-	}
+//    // add needed delay at end of byte cycle, pulsewidth = 0
+//    for(; memaddr < LEDBUFFSIZE; memaddr++){
+//		ledBuffer[memaddr] = 0;
+//	}
+
+
+
+    for(int i=memaddr;i<1600;i++){
+        ledBuffer[i]=0;
+    }
 
 	//DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
     transferRunning = true;
 
     // DMA (needed to be reintialized -> NO DEINIT!!)
+    dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
+    dmaConfig.DMA_BufferSize = (uint32_t) 1600;
     DMA_Init(DMA1_Channel6, &dmaConfig);
 	DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
 
