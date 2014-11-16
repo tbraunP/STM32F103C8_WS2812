@@ -14,7 +14,7 @@
  extern "C" {
 #endif
 
-#define LED (60)
+#define LED (61)
 
 void WS2812_Init();
 
