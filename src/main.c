@@ -35,10 +35,10 @@ int main(void) {
         clear[i].green = 0;
     }
 
-    UART_SendString("STM32F103WS2812 says hello\n\0");
-
     // run uart
     UART_init();
+
+    UART_SendString("STM32F103WS2812 says hello\n\0");
 
     WS2812_Init();
 
