@@ -24,6 +24,21 @@ typedef struct RGB_T{
 } RGB_T;
 
 
+typedef struct HSV_T{
+    uint16_t h;     // color degree (0..359)
+    uint8_t s;      // 0..100, saturation
+    uint8_t v;      // 0..100, value
+} HSV_T;
+
+
+/**
+ * @brief convertHSV2RGB
+ * Convert HSV to RGB
+ * @param hsv - HSV value
+ * @return RGB value
+ */
+RGB_T convertHSV2RGB(const HSV_T* hsv);
+
 #ifdef __cplusplus
  }
 #endif

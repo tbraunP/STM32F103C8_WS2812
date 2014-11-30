@@ -36,6 +36,10 @@ void WS2812_Init();
  */
 void WS2812_send(RGB_T* color, uint16_t leds);
 
+/**
+ * @brief DMA1_Channel6_IRQHandler
+ * DMA Handler
+ */
 void DMA1_Channel6_IRQHandler();
 
 /**
