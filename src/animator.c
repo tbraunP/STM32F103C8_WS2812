@@ -5,6 +5,7 @@
 #include "stm32f10x_conf.h"
 #include "stm32f10x.h"
 
+#include "hw/uart.h"
 
 
 // CONSTANTS
@@ -69,7 +70,7 @@ void Animator_Init(){
     NVIC_Init(&NVIC_InitStructure);
 
     // now start the timer
-    TIM_Cmd(TIM4, ENABLE);
+    //TIM_Cmd(TIM4, ENABLE);
 
 }
 

@@ -42,6 +42,7 @@ int main(void) {
 
     WS2812_Init();
 
+    //WS2812_clear();
     WS2812_send(clear, LED);
 
     Delay(5000000L);
@@ -61,6 +62,7 @@ int main(void) {
             stripe[j].green = 255;
             stripe[j].red = 255;
 
+            WS2812_send(clear, LED);
             WS2812_send(clear, LED);
             WS2812_send(clear, LED);
 

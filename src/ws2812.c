@@ -15,7 +15,7 @@
 static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
-#define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 50))
+#define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 80))
 static uint8_t ledBuffer[LEDBUFFSIZE];
 
 
@@ -24,11 +24,14 @@ static uint8_t ledBuffer[LEDBUFFSIZE];
 #define LOGIC_ONE ((uint16_t) (20))
 #define LOGIC_ZERO ((uint16_t) (10))
 
-
+/**
+ * @brief WS2812_Init
+ * Initialize WS2812 Driver
+ */
 void WS2812_Init() {
 
     // reset content
-    for(int i=0;i<1600;i++){
+    for(int i=0;i < LEDBUFFSIZE;i++){
         ledBuffer[i]=0;
     }
 
@@ -101,18 +104,23 @@ void WS2812_Init() {
     transferRunning = false;
 }
 
-/* This function sends data bytes out to a string of WS2812s
+/**
+ * This function sends data bytes out to a string of WS2812s
  * The first argument is a pointer to the first RGB triplet to be sent
  * The seconds argument is the number of LEDs in the chain
  *
  * This will result in the RGB triplet passed by argument 1 being sent to
  * the LED that is the furthest away from the controller (the point where
  * data is injected into the chain)
+ * @param color - rgb map (index corresponds to led number)
+ * @param leds  - number of leds specified in map, all others will be shutdown
  */
 void WS2812_send(RGB_T* color, uint16_t leds) {
-    // wait for running transfers
+    // wait for running transfers, not interrupt save!
     while (transferRunning)
         ;
+    transferRunning = true;
+
 
     uint32_t memaddr = 0;	// reset buffer memory index
 
@@ -154,18 +162,17 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
     }
 
     // deactivate remaining leds
-    for(uint16_t j = leds; j < LED; j++){
-        ledBuffer[memaddr++] = LOGIC_ZERO;
-        ledBuffer[memaddr++] = LOGIC_ZERO;
-        ledBuffer[memaddr++] = LOGIC_ZERO;
+    for(uint16_t i = leds; i < LED; i++){
+        for (uint8_t j = 0; j < 24; j++){
+            ledBuffer[memaddr] = LOGIC_ZERO;
+            memaddr++;
+        }
     }
 
-    for(int i=memaddr;i<LEDBUFFSIZE;i++){
+    // set to zero to apply new colors
+    for(uint32_t i=memaddr;i < LEDBUFFSIZE;i++){
         ledBuffer[i]=0;
     }
-
-    //DMA_SetCurrDataCounter(DMA1_Channel6, buffersize); // load number of bytes to be transferred
-    transferRunning = true;
 
     // DMA (needed to be reintialized -> NO DEINIT!!)
     dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
@@ -175,6 +182,17 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
 
     TIM_Cmd(TIM3, ENABLE); // enable Timer 3
 }
+
+
+/**
+ * Shutdown all leds
+ */
+void WS2812_clear(){
+    WS2812_send(NULL, 0);
+}
+
+
+
 
 void DMA1_Channel6_IRQHandler() {
     DMA_Cmd(DMA1_Channel6, DISABLE);
