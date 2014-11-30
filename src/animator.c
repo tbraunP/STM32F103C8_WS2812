@@ -6,6 +6,7 @@
 #include "stm32f10x.h"
 
 #include "hw/uart.h"
+#include "ws2812.h"
 
 
 // CONSTANTS
@@ -23,8 +24,19 @@ static volatile uint16_t seconds = 0;
 // forward declarations
 static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond);
 
+// RGB structure to draw on
+static RGB_T rgbStripe[LED];
+static HSV_T hsvStripe[LED];
+
 
 void Animator_Init(){
+
+    // start WS2812
+    WS2812_Init();
+    WS2812_clear();
+    WS2812_clear();
+
+
     // Timer configuration
     TIM_TimeBaseInitTypeDef timerConfig;
     TIM_OCInitTypeDef TIM_OCInitStructure;
@@ -71,7 +83,6 @@ void Animator_Init(){
 
     // now start the timer
     TIM_Cmd(TIM4, ENABLE);
-
 }
 
 
@@ -105,10 +116,71 @@ void TIM4_IRQHandler(void){
 
         // update visualization of clock
         updateVisualization(seconds, (loops % UPDATE_RATE_SEC), UPDATE_RATE_SEC);
+        // clear IRQ Status
+        TIM_ClearITPendingBit(TIM4, TIM_IT_CC1);
+        NVIC_ClearPendingIRQ(TIM2_IRQn);
     }
 }
 
 
 static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond){
+    uint32_t aniSteps = RATE_MIN;
+    uint32_t clk = seconds * UPDATE_RATE_SEC + posInSecond;
 
+    // degree if one roations consists of anisteps
+    float deg = (360.0 * clk) / aniSteps;
+    deg = ((deg >= 360) ? (deg - 360.0) : deg);
+
+    // degree per LED
+    // 1 LED at 0
+    // 2 LED at 1*dst
+    // 3 LED at 2*dest etc.
+    float dst = 360.0 / LED;
+
+    // calculate indize of leds
+    uint32_t led = (uint32_t) deg/dst;
+    led = led % LED;
+    uint32_t ledNext = (led +1) % LED;
+
+    // ligh up value
+    float lightUpLED = 1-(deg/dst - led);
+    float lightUpLEDNext = 1- lightUpLED;
+
+//    // now set output
+//    for(uint32_t i = 0; i < LED; i++){
+//        hsvStripe[i].s = 100;
+//        hsvStripe[i].h = 250;
+//        hsvStripe[i].v = 0;
+//    }
+
+//    // not set lightup
+//    hsvStripe[led].v = 100.0 * lightUpLED;
+//    hsvStripe[ledNext].v = 100.0 * lightUpLEDNext;
+
+//    // now convert to rgb value
+//    for(uint32_t i = 0; i < LED; i++){
+//        rgbStripe[i] = convertHSV2RGB(&hsvStripe[i]);
+//    }
+
+    for(uint32_t i = 0; i < LED; i++){
+        rgbStripe[i].blue = 0;
+        rgbStripe[i].green = 0;
+        rgbStripe[i].red = 0;
+    }
+
+
+    lightUpLED  = 1.0;
+    lightUpLEDNext = 1.0;
+
+    rgbStripe[led].green = 255.0 * lightUpLED;
+    rgbStripe[led].red = 255.0 * lightUpLED;
+    rgbStripe[led].blue = 255.0 * lightUpLED;
+
+    rgbStripe[ledNext].green = 255.0 * lightUpLEDNext;
+    rgbStripe[ledNext].red = 255.0 * lightUpLEDNext;
+    rgbStripe[ledNext].blue = 255.0 * lightUpLEDNext;
+
+
+    // no draw the fuck hahahahahaha
+    WS2812_send(rgbStripe, LED);
 }

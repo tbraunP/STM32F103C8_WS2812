@@ -21,18 +21,16 @@ void Delay(uint32_t delay) {
 }
 
 static RGB_T stripe[LED];
-static RGB_T clear[LED];
 
 int main(void) {
+
+    volatile float zz = 360.0 * zz;
 
     // clear stripe
     for(uint16_t i = 0; i < LED; i++){
         stripe[i].blue = 0;
         stripe[i].green = 0;
         stripe[i].red = 0;
-        clear[i].blue = 0;
-        clear[i].red = 0;
-        clear[i].green = 0;
     }
 
     // run uart
@@ -40,9 +38,9 @@ int main(void) {
 
     UART_SendString("STM32F103WS2812 says hello\n\0");
 
-    WS2812_Init();
+   // WS2812_Init();
 
-    WS2812_clear();
+  //  WS2812_clear();
 
     Delay(5000000L);
 
@@ -67,9 +65,9 @@ int main(void) {
 //                stripe[0].blue = 1;
 //            }
 
-            WS2812_clear();
+   //         WS2812_clear();
 
-            WS2812_send(stripe, LED);
+ //           WS2812_send(stripe, LED);
             Delay(7500000L);
         }
     }
