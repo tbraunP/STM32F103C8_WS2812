@@ -176,6 +176,7 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
     // DMA (needed to be reintialized -> NO DEINIT!!)
     dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
     dmaConfig.DMA_BufferSize = (uint32_t) (LEDBUFFSIZE);
+    DMA_ClearFlag(DMA1_FLAG_TC6);
     DMA_Init(DMA1_Channel6, &dmaConfig);
     DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
 
