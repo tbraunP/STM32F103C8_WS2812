@@ -3,13 +3,14 @@
 #include "stm32f10x_conf.h"
 #include "system_stm32f10x.h"
 
-#include "ws2812.h"
-#include "colors.h"
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "ws2812.h"
+#include "colors.h"
+#include "hw/uart.h"
 #include "animator.h"
 
 
@@ -34,6 +35,10 @@ int main(void) {
         clear[i].green = 0;
     }
 
+    UART_SendString("STM32F103WS2812 says hello\n\0");
+
+    // run uart
+    UART_init();
 
     WS2812_Init();
 
@@ -62,16 +67,5 @@ int main(void) {
             WS2812_send(stripe, LED);
             Delay(750000L);
         }
-    }
-
-
-
-
-    //stripe[1][1] = 255;
-
-    //WS2812_send(stripe, LED);
-
-    while(1){
-        Delay(500000L);
     }
 }

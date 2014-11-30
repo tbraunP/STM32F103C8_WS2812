@@ -1,6 +1,15 @@
+Makefile
 CMakeCache.txt
 CMakeFiles/*
 cmake_install.cmake
 *.map
 *.bin
 *.elf
+stm32f103Demo.map
+stm32f103Demo.bin
+stm32f103Demo.elf
+STM32F103C8.creator.user
+CMakeLists.txt.user
+Makefile.orig
+WS2812.creator.user
+stm32f103WS2812.cbp
