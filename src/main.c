@@ -42,7 +42,7 @@ int main(void) {
 
     WS2812_Init();
 
-    //WS2812_clear();
+    WS2812_clear();
 
     Delay(5000000L);
 
@@ -57,16 +57,17 @@ int main(void) {
                 stripe[i].green = 0;
                 stripe[i].red = 0;
             }
-            stripe[0].blue = 1;
-            //stripe[0].green = 255;
-            //stripe[0].red = 255;
 
-            stripe[1].blue = 255;
-            stripe[1].green = 255;
-            stripe[1].red = 255;
+            stripe[j].red = 12;
+            stripe[j].green = 0;
+            stripe[j].blue = 0;
 
+            // first led bugfix? pegel zu klein?
+            if(j!=0){
+                stripe[0].blue = 1;
+            }
 
-            //WS2812_clear();
+            WS2812_clear();
 
             WS2812_send(stripe, LED);
             Delay(7500000L);
