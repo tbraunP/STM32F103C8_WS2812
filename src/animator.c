@@ -169,16 +169,16 @@ static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t
     }
 
 
-    lightUpLED  = 1.0;
-    lightUpLEDNext = 1.0;
+    //lightUpLED  = 1.0;
+    //lightUpLEDNext = 1.0;
 
     rgbStripe[led].green = 255.0 * lightUpLED;
-    rgbStripe[led].red = 255.0 * lightUpLED;
-    rgbStripe[led].blue = 255.0 * lightUpLED;
+    rgbStripe[led].red = 0 * lightUpLED;
+    rgbStripe[led].blue = 0 * lightUpLED;
 
-    rgbStripe[ledNext].green = 255.0 * lightUpLEDNext;
-    rgbStripe[ledNext].red = 255.0 * lightUpLEDNext;
-    rgbStripe[ledNext].blue = 255.0 * lightUpLEDNext;
+//    rgbStripe[ledNext].green = 255.0 * lightUpLEDNext;
+//    rgbStripe[ledNext].red = 0 * lightUpLEDNext;
+//    rgbStripe[ledNext].blue = 0 * lightUpLEDNext;
 
 
     // no draw the fuck hahahahahaha
