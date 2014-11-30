@@ -58,14 +58,14 @@ int main(void) {
                 stripe[i].red = 0;
             }
 
-            stripe[j].red = 12;
+            stripe[j].red = 50;
             stripe[j].green = 0;
             stripe[j].blue = 0;
 
             // first led bugfix? pegel zu klein?
-            if(j!=0){
-                stripe[0].blue = 1;
-            }
+//            if(j!=0){
+//                stripe[0].blue = 1;
+//            }
 
             WS2812_clear();
 

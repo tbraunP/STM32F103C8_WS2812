@@ -127,6 +127,13 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
     // fill transmit buffer with correct compare values to achieve
     // correct pulse widths according to color values
     for(uint16_t i=0; i < leds; i++) {
+
+        // first led bugfix? HACK, Pegel zu niedrig?
+        if(i==0 && color[i].green == 0 && color[i].blue ==0 && color[i].red == 0){
+            color[i].blue = 1;
+        }
+
+
         for (uint8_t j = 0; j < 8; j++)	// GREEN data
         {
             if ((color[i].green << j) & 0x80)// data sent MSB first, j = 0 is MSB j = 7 is LSB
