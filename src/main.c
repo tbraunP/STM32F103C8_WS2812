@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "animator.h"
+
 
 void Delay(uint32_t delay) {
     for (uint32_t i; i < delay; i++){
@@ -38,6 +40,9 @@ int main(void) {
     WS2812_send(clear, LED);
 
     Delay(5000000L);
+
+    Animator_Init();
+
 
     while(1){
         for(uint16_t j = 0; j < LED; j++){

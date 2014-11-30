@@ -87,3 +87,5 @@ src/colors.c
 src/main.c
 src/stm32f10x_it.c
 src/ws2812.c
+src/animator.c
+inc/animator.h
