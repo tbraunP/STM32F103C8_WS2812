@@ -70,7 +70,7 @@ void Animator_Init(){
     NVIC_Init(&NVIC_InitStructure);
 
     // now start the timer
-    //TIM_Cmd(TIM4, ENABLE);
+    TIM_Cmd(TIM4, ENABLE);
 
 }
 
@@ -96,6 +96,7 @@ void TIM4_IRQHandler(void){
 
         if(loops % UPDATE_RATE_SEC == 0){
             seconds++;
+            seconds = seconds % 60;
             UART_SendString("S\n\0");
         }
 
