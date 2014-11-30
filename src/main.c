@@ -15,7 +15,7 @@
 
 
 void Delay(uint32_t delay) {
-    for (uint32_t i; i < delay; i++){
+    for (uint32_t i=0; i < delay; i++){
         __asm__ volatile("NOP");
     }
 }
@@ -42,8 +42,7 @@ int main(void) {
 
     WS2812_Init();
 
-    //WS2812_clear();
-    WS2812_send(clear, LED);
+    WS2812_clear();
 
     Delay(5000000L);
 
@@ -62,9 +61,7 @@ int main(void) {
             stripe[j].green = 255;
             stripe[j].red = 255;
 
-            WS2812_send(clear, LED);
-            WS2812_send(clear, LED);
-            WS2812_send(clear, LED);
+            WS2812_clear();
 
             WS2812_send(stripe, LED);
             Delay(750000L);

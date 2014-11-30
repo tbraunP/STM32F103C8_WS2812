@@ -162,10 +162,9 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
     }
 
     // deactivate remaining leds
-    for(uint16_t i = leds; i < LED; i++){
-        for (uint8_t j = 0; j < 24; j++){
-            ledBuffer[memaddr] = LOGIC_ZERO;
-            memaddr++;
+    for(uint16_t j = leds; j < LED; j++){
+        for(uint16_t k=0; k<24;k++){
+            ledBuffer[memaddr++] = LOGIC_ZERO;
         }
     }
 
