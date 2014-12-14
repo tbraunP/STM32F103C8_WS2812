@@ -16,6 +16,17 @@
 #define     COUNTERVALUE40MS        (uint16_t) (0xFF)
 #define     COUNTERVALUE40MS_2      (uint16_t) (COUNTERVALUE40MS/2)
 
+
+// Visulization
+// 0..100
+#define SATURATION                  (70)
+// 0..360
+#define BASECOLOR_SECONDS           (100)
+#define BASECOLOR_MINUTES           (300)
+#define BASECOLOR_HOURS             (200)
+// 0..100
+#define MAX_BRIGHTNESS              (10)
+
 // macrotick counter
 static volatile uint16_t loops = 0;
 static volatile uint16_t seconds = 0;
@@ -200,27 +211,27 @@ static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t secon
 
     // now set output
     for(uint32_t i = 0; i < LED; i++){
-        hsvStripe[i].s = 100;
+        hsvStripe[i].s = SATURATION;
         hsvStripe[i].h = 100;
         hsvStripe[i].v = 0;
     }
 
     // not set lightup
-    hsvStripe[secondAnimation.led].v = 40.0 * secondAnimation.lightUpLED;
-    hsvStripe[secondAnimation.ledNext].v = 40.0 * secondAnimation.lightUpLEDNext;
+    hsvStripe[secondAnimation.led].v = MAX_BRIGHTNESS * secondAnimation.lightUpLED;
+    hsvStripe[secondAnimation.ledNext].v = MAX_BRIGHTNESS * secondAnimation.lightUpLEDNext;
 
 
     // minutes
     hsvStripe[minutesAnimation.led].h = 300;
     hsvStripe[minutesAnimation.ledNext].h = 300;
-    hsvStripe[minutesAnimation.led].v = 40.0 * minutesAnimation.lightUpLED;
-    hsvStripe[minutesAnimation.ledNext].v = 40.0 * minutesAnimation.lightUpLEDNext;
+    hsvStripe[minutesAnimation.led].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLED;
+    hsvStripe[minutesAnimation.ledNext].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLEDNext;
 
     // hours
     hsvStripe[hoursAnimation.led].h = 200;
     hsvStripe[hoursAnimation.ledNext].h = 200;
-    hsvStripe[hoursAnimation.led].v = 40.0 * hoursAnimation.lightUpLED;
-    hsvStripe[hoursAnimation.ledNext].v = 40.0 * hoursAnimation.lightUpLEDNext;
+    hsvStripe[hoursAnimation.led].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLED;
+    hsvStripe[hoursAnimation.ledNext].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLEDNext;
 
 
 
