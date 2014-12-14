@@ -24,21 +24,10 @@ static uint8_t ledBuffer[LEDBUFFSIZE];
 #define LOGIC_ONE ((uint16_t) (20))
 #define LOGIC_ZERO ((uint16_t) (10))
 
-/**
- * @brief WS2812_Init
- * Initialize WS2812 Driver
- */
-void WS2812_Init() {
 
-    // reset content
-    for(int i=0;i < LEDBUFFSIZE;i++){
-        ledBuffer[i]=0;
-    }
-
+static void WS2812_Init_PIN(){
 
     GPIO_InitTypeDef gpioConfig;
-    TIM_TimeBaseInitTypeDef timConfig;
-    TIM_OCInitTypeDef TIM_OCInitStructure;
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     GPIO_StructInit(&gpioConfig);
@@ -47,48 +36,57 @@ void WS2812_Init() {
     gpioConfig.GPIO_Speed = GPIO_Speed_50MHz;
 
     GPIO_Init(GPIOA, &gpioConfig);
+}
 
-    // Enable Timer
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+static void WS2812_ReInit_PWM(){
+    static bool firstRun = true;
+    static TIM_TimeBaseInitTypeDef timConfig;
+    static TIM_OCInitTypeDef TIM_OCInitStructure;
 
-    /* Compute the prescaler value for 24 MHz -> 30 * 24 MHz = 1,25 us */
-    uint16_t prescaler = (uint16_t) (SystemCoreClock / 24000000) - 1;
-    /* Time base configuration */
-    timConfig.TIM_Period = (PERIODE - 1); // 800kHz
-    timConfig.TIM_Prescaler = prescaler;
-    timConfig.TIM_ClockDivision = 0;
-    timConfig.TIM_CounterMode = TIM_CounterMode_Up;
-    TIM_TimeBaseInit(TIM3, &timConfig);
-
-    /* PWM1 Mode configuration: Channel1 */
-    TIM_OCStructInit(&TIM_OCInitStructure);
-    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-    TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    //TIM_OCInitStructure.TIM_Pulse = 0;
-    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-    //TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
-    TIM_OC1Init(TIM3, &TIM_OCInitStructure);
-
-    // Configure dma
-    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-
-    /* DMA1 Channel6 Config */
+    // Reset configuration
+    TIM_DeInit(TIM3);
     DMA_DeInit(DMA1_Channel6);
 
-    DMA_StructInit(&dmaConfig);
-    dmaConfig.DMA_PeripheralBaseAddr = (uint32_t) &(TIM3->CCR1);
-    dmaConfig.DMA_DIR = DMA_DIR_PeripheralDST;
-    dmaConfig.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-    dmaConfig.DMA_MemoryInc = DMA_MemoryInc_Enable;
-    dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-    dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
-    dmaConfig.DMA_Mode = DMA_Mode_Normal;
-    dmaConfig.DMA_Priority = DMA_Priority_High;
-    dmaConfig.DMA_M2M = DMA_M2M_Disable;
+    if(firstRun){
+        /* Compute the prescaler value for 24 MHz -> 30 * 24 MHz = 1,25 us */
+        uint16_t prescaler = (uint16_t) (SystemCoreClock / 24000000) - 1;
+        /* Time base configuration */
+        timConfig.TIM_Period = (PERIODE - 1); // 800kHz
+        timConfig.TIM_Prescaler = prescaler;
+        timConfig.TIM_ClockDivision = 0;
+        timConfig.TIM_CounterMode = TIM_CounterMode_Up;
 
-    // DMA config
-    dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
-    dmaConfig.DMA_BufferSize = (uint32_t) (LEDBUFFSIZE);
+        /* PWM1 Mode configuration: Channel1 */
+        TIM_OCStructInit(&TIM_OCInitStructure);
+        TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+        TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+
+
+        /* DMA1 Channel6 Config */
+        DMA_StructInit(&dmaConfig);
+        dmaConfig.DMA_PeripheralBaseAddr = (uint32_t) &(TIM3->CCR1);
+        dmaConfig.DMA_DIR = DMA_DIR_PeripheralDST;
+        dmaConfig.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+        dmaConfig.DMA_MemoryInc = DMA_MemoryInc_Enable;
+        dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+        dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+        dmaConfig.DMA_Mode = DMA_Mode_Normal;
+        dmaConfig.DMA_Priority = DMA_Priority_High;
+        dmaConfig.DMA_M2M = DMA_M2M_Disable;
+
+        // DMA config
+        dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
+        dmaConfig.DMA_BufferSize = (uint32_t) (LEDBUFFSIZE);
+
+        // configure only once
+        firstRun = false;
+    }
+
+    // Init timer
+    TIM_TimeBaseInit(TIM3, &timConfig);
+    TIM_OC1Init(TIM3, &TIM_OCInitStructure);
+
     DMA_Init(DMA1_Channel6, &dmaConfig);
 
     /* TIM3 CC1 DMA Request enable */
@@ -100,6 +98,29 @@ void WS2812_Init() {
 
     NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
     NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+}
+
+/**
+ * @brief WS2812_Init
+ * Initialize WS2812 Driver
+ */
+void WS2812_Init() {
+
+    // reset content
+    for(int i=0;i < LEDBUFFSIZE;i++){
+        ledBuffer[i]=0;
+    }
+
+    WS2812_Init_PIN();
+
+
+    // Enable Clocks
+    // Timer
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+    // DMA
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+
+    WS2812_ReInit_PWM();
 
     transferRunning = false;
 }
@@ -180,11 +201,8 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
         ledBuffer[i]=0;
     }
 
-    // DMA (needed to be reintialized -> NO DEINIT!!)
-    dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
-    dmaConfig.DMA_BufferSize = (uint32_t) (LEDBUFFSIZE);
-    DMA_ClearFlag(DMA1_FLAG_TC6);
-    DMA_Init(DMA1_Channel6, &dmaConfig);
+    // DMA (needed to be reintialized)
+    WS2812_ReInit_PWM();
     DMA_Cmd(DMA1_Channel6, ENABLE); // enable DMA channel 6
 
     TIM_Cmd(TIM3, ENABLE); // enable Timer 3
@@ -204,6 +222,8 @@ void WS2812_clear(){
 void DMA1_Channel6_IRQHandler() {
     DMA_Cmd(DMA1_Channel6, DISABLE);
     TIM_Cmd(TIM3, DISABLE);
+
+    // reset DMA status
     DMA_ClearFlag(DMA1_FLAG_TC6);
     NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);
     transferRunning = false;
