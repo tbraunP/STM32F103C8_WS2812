@@ -20,13 +20,13 @@
 
 // Visulization
 // 0..100
-#define SATURATION                  (70)
+#define SATURATION                  (100)
 // 0..360
 #define BASECOLOR_SECONDS           (100)
 #define BASECOLOR_MINUTES           (300)
 #define BASECOLOR_HOURS             (200)
 // 0..100
-#define MAX_BRIGHTNESS              (10)
+#define MAX_BRIGHTNESS              (20)
 
 // macrotick counter
 static volatile uint16_t loops = 0;
