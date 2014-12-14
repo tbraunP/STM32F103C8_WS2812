@@ -1,6 +1,7 @@
 #include "animator.h"
 
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "stm32f10x_conf.h"
 #include "stm32f10x.h"
@@ -186,6 +187,70 @@ static void calcLED(uint32_t totalAnimationSteps, uint32_t relPosition, ANIM_LED
 }
 
 
+/**
+ * @brief max
+ * If criterion is fullfilled return max(first, second) else first
+ * @param criterion - criterion
+ * @param first - first element (standard if criterion not fullfilled)
+ * @param second - second element
+ * @return If criterion is fullfilled return max(first, second) else first
+ */
+static float max(bool criterion, float first, float second){
+    if(criterion){
+        return ((first > second) ? first : second);
+    }
+    return first;
+}
+
+/**
+ * @brief mergeColorsForPixel
+ * Perform merge for pixel index
+ * @param index - pixel for merging
+ * @param hours
+ * @param minutes
+ * @param seconds
+ */
+static void mergeColorsForPixel(uint16_t index, ANIM_LED_t* hours, ANIM_LED_t* minutes, ANIM_LED_t* seconds){
+    // mix colors of elements by their brightness for the element
+    float influenceSeconds = max(index == seconds->led, 0,seconds->lightUpLED) + max(index == seconds->ledNext, 0,seconds->lightUpLEDNext);
+    float influenceMinutes = max(index == minutes->led, 0,minutes->lightUpLED) + max(index == minutes->ledNext, 0,minutes->lightUpLEDNext);
+    float influencehours = max(index == hours->led, 0,hours->lightUpLED) + max(index == hours->ledNext, 0,hours->lightUpLEDNext);
+
+    hsvStripe[index].h = influenceSeconds * BASECOLOR_SECONDS + influenceMinutes * BASECOLOR_MINUTES + influencehours * BASECOLOR_HOURS;
+    hsvStripe[index].h = hsvStripe[index].h % 360;
+
+    // brightness -> take maximum
+    float brightness = 0;
+    brightness = max(index == hours->led, brightness, hours->lightUpLED);
+    brightness = max(index == hours->ledNext, brightness, hours->lightUpLEDNext);
+    brightness = max(index == minutes->led, brightness, minutes->lightUpLED);
+    brightness = max(index == minutes->ledNext, brightness, minutes->lightUpLEDNext);
+    brightness = max(index == seconds->led, brightness, seconds->lightUpLED);
+    brightness = max(index == seconds->ledNext, brightness, seconds->lightUpLEDNext);
+
+    hsvStripe[index].v = MAX_BRIGHTNESS * brightness;
+
+}
+
+/**
+ * @brief mergeColors
+ * Merge the single animation colors together, necessary since a led may be adressed by more than one animation
+ * at a given time
+ * @param hours
+ * @param minutes
+ * @param seconds
+ */
+static void mergeColors(ANIM_LED_t* hours, ANIM_LED_t* minutes, ANIM_LED_t* seconds){
+    // maybe multiple mixes for same index -> no problem
+    mergeColorsForPixel(hours->led, hours, minutes, seconds);
+    mergeColorsForPixel(hours->ledNext, hours, minutes, seconds);
+    mergeColorsForPixel(minutes->led, hours, minutes, seconds);
+    mergeColorsForPixel(minutes->ledNext, hours, minutes, seconds);
+    mergeColorsForPixel(seconds->led, hours, minutes, seconds);
+    mergeColorsForPixel(seconds->ledNext, hours, minutes, seconds);
+}
+
+
 static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t seconds, uint16_t posInSecond){
     uint32_t aniSteps = RATE_MIN;
     uint32_t clk = seconds * UPDATE_RATE_SEC + posInSecond;
@@ -209,34 +274,35 @@ static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t secon
     calcLED(aniSteps, clk, &hoursAnimation);
 
 
-    // now set output
+    // now set output to nothing ;)
     for(uint32_t i = 0; i < LED; i++){
         hsvStripe[i].s = SATURATION;
-        hsvStripe[i].h = 100;
+        hsvStripe[i].h = 0;
         hsvStripe[i].v = 0;
     }
 
-    // not set lightup
-    hsvStripe[secondAnimation.led].v = MAX_BRIGHTNESS * secondAnimation.lightUpLED;
-    hsvStripe[secondAnimation.ledNext].v = MAX_BRIGHTNESS * secondAnimation.lightUpLEDNext;
+//    // not set lightup
+//    hsvStripe[secondAnimation.led].h = BASECOLOR_SECONDS;
+//    hsvStripe[secondAnimation.ledNext].h = BASECOLOR_SECONDS;
+//    hsvStripe[secondAnimation.led].v = MAX_BRIGHTNESS * secondAnimation.lightUpLED;
+//    hsvStripe[secondAnimation.ledNext].v = MAX_BRIGHTNESS * secondAnimation.lightUpLEDNext;
 
 
-    // minutes
-    hsvStripe[minutesAnimation.led].h = 300;
-    hsvStripe[minutesAnimation.ledNext].h = 300;
-    hsvStripe[minutesAnimation.led].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLED;
-    hsvStripe[minutesAnimation.ledNext].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLEDNext;
+//    // minutes
+//    hsvStripe[minutesAnimation.led].h = BASECOLOR_MINUTES;
+//    hsvStripe[minutesAnimation.ledNext].h = BASECOLOR_MINUTES;
+//    hsvStripe[minutesAnimation.led].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLED;
+//    hsvStripe[minutesAnimation.ledNext].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLEDNext;
 
-    // hours
-    hsvStripe[hoursAnimation.led].h = 200;
-    hsvStripe[hoursAnimation.ledNext].h = 200;
-    hsvStripe[hoursAnimation.led].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLED;
-    hsvStripe[hoursAnimation.ledNext].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLEDNext;
+//    // hours
+//    hsvStripe[hoursAnimation.led].h = BASECOLOR_HOURS;
+//    hsvStripe[hoursAnimation.ledNext].h = BASECOLOR_HOURS;
+//    hsvStripe[hoursAnimation.led].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLED;
+//    hsvStripe[hoursAnimation.ledNext].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLEDNext;
 
 
+    mergeColors(&hoursAnimation, &minutesAnimation, &secondAnimation);
 
-    //hsvStripe[led].v = 40.0 * lightUpLED;
-    //hsvStripe[ledNext].v = 40.0 * lightUpLEDNext;
 
 
     // now convert to rgb value
