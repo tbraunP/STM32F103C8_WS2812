@@ -43,7 +43,7 @@ static void WS2812_ReInit_PWM(){
     static TIM_TimeBaseInitTypeDef timConfig;
     static TIM_OCInitTypeDef TIM_OCInitStructure;
 
-    // Reset configuration
+    // Reset configuration NECESSARY for Reconfiguration
     TIM_DeInit(TIM3);
     DMA_DeInit(DMA1_Channel6);
 
@@ -220,8 +220,11 @@ void WS2812_clear(){
 
 
 void DMA1_Channel6_IRQHandler() {
+    // Remember DeInit necessary for Reinit (also done in WS2812_ReInit_PWM, so we can skip it here)
     DMA_Cmd(DMA1_Channel6, DISABLE);
     TIM_Cmd(TIM3, DISABLE);
+    //TIM_DeInit(TIM3);
+    //DMA_DeInit(DMA1_Channel6);
 
     // reset DMA status
     DMA_ClearFlag(DMA1_FLAG_TC6);
