@@ -129,9 +129,9 @@ void WS2812_send(RGB_T* color, uint16_t leds) {
     for(uint16_t i=0; i < leds; i++) {
 
         // first led bugfix? HACK, Pegel zu niedrig?
-        if(i==0 && color[i].green == 0 && color[i].blue ==0 && color[i].red == 0){
-            color[i].blue = 1;
-        }
+        //if(i==0 && color[i].green == 0 && color[i].blue ==0 && color[i].red == 0){
+        //    color[i].blue = 1;
+        //}
 
 
         for (uint8_t j = 0; j < 8; j++)	// GREEN data
