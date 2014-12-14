@@ -41,7 +41,7 @@ static volatile uint8_t hours = 0;
  * lightUpNext - 0 <= lightUp <= 1 (intensity)
  */
 typedef struct ANIM_LED_t{
-    uint8_t led, ledNext;
+    uint16_t led, ledNext;
     float lightUpLED, lightUpLEDNext;
 } ANIM_LED_t;
 
