@@ -16,7 +16,7 @@ static DMA_InitTypeDef dmaConfig;
 static volatile bool transferRunning = false;
 
 #define LEDBUFFSIZE ((uint32_t) ((3 * 8 * LED) + 80))
-static uint8_t ledBuffer[LEDBUFFSIZE];
+static uint16_t ledBuffer[LEDBUFFSIZE];
 
 
 // Timing Definitions
@@ -70,14 +70,14 @@ static void WS2812_ReInit_PWM(){
         dmaConfig.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
         dmaConfig.DMA_MemoryInc = DMA_MemoryInc_Enable;
         dmaConfig.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-        dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+        dmaConfig.DMA_MemoryDataSize = DMA_PeripheralDataSize_HalfWord;
         dmaConfig.DMA_Mode = DMA_Mode_Normal;
         dmaConfig.DMA_Priority = DMA_Priority_High;
         dmaConfig.DMA_M2M = DMA_M2M_Disable;
 
         // DMA config
         dmaConfig.DMA_MemoryBaseAddr = (uint32_t) ledBuffer;
-        dmaConfig.DMA_BufferSize = (uint32_t) (LEDBUFFSIZE);
+        dmaConfig.DMA_BufferSize = (uint32_t) (2*LEDBUFFSIZE);
 
         // configure only once
         firstRun = false;
