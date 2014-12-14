@@ -22,9 +22,9 @@
 // 0..100
 #define SATURATION                  (100)
 // 0..360
-#define BASECOLOR_SECONDS           (100)
-#define BASECOLOR_MINUTES           (300)
-#define BASECOLOR_HOURS             (200)
+#define BASECOLOR_SECONDS           (0)
+#define BASECOLOR_MINUTES           (120)
+#define BASECOLOR_HOURS             (240)
 // 0..100
 #define MAX_BRIGHTNESS              (20)
 
