@@ -15,7 +15,7 @@
  extern "C" {
 #endif
 
-#define LED (3)
+#define LED (60)
 
 /**
 * @brief WS2812_Init
