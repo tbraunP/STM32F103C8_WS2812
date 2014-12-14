@@ -19,10 +19,23 @@
 // macrotick counter
 static volatile uint16_t loops = 0;
 static volatile uint16_t seconds = 0;
+static volatile uint16_t minutes = 0;
+static volatile uint16_t hours = 0;
 
+/**
+ * data structure for animation (2 leds + brightness)
+ * led - which should be light up;
+ * lightUp - 0 <= lightUp <= 1 (intensity);
+ * ledNext - nextLed which should be light up;
+ * lightUpNext - 0 <= lightUp <= 1 (intensity)
+ */
+typedef struct ANIM_LED_t{
+    uint8_t led, ledNext;
+    float lightUpLED, lightUpLEDNext;
+} ANIM_LED_t;
 
 // forward declarations
-static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond);
+static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t seconds, uint16_t posInSecond);
 
 // RGB structure to draw on
 static RGB_T rgbStripe[LED];
@@ -99,14 +112,26 @@ void TIM4_IRQHandler(void){
         // now increment local loop counter and modify local
         // time on second increment
         ++loops;
-        if(loops == RATE_MIN){
-            // reset timing information for next 1 second round
-            loops = 0;
-        }
+
 
         if(loops % UPDATE_RATE_SEC == 0){
+            // primitve watch
             seconds++;
+            if(seconds == 60){
+                seconds = 0;
+                ++minutes;
+                if(minutes == 60){
+                    ++hours;
+                    minutes = 0;
+                    if(hours == 24){
+                        hours = 0;
+                    }
+                }
+            }
+
+
             seconds = seconds % 60;
+            loops = 0;
             //UART_SendString("S\n\0");
         }
 
@@ -114,7 +139,7 @@ void TIM4_IRQHandler(void){
         TIM4->CCR1 += COUNTERVALUE40MS;
 
         // update visualization of clock
-        updateVisualization(seconds, (loops % UPDATE_RATE_SEC), UPDATE_RATE_SEC);
+        updateVisualization(hours, minutes, seconds, (loops % UPDATE_RATE_SEC));
     }
 }
 
@@ -126,12 +151,9 @@ void TIM4_IRQHandler(void){
  *
  * @param totalAnimationSteps - number of animationsteps until LED should surround the ring
  * @param relPosition -  position within ring 0<= relPosition < totalAnimationSteps
- * @param led - led which should be light up
- * @param lightUp - 0 <= lightUp <= 1 (intensity)
- * @param ledNext - nextLed which should be light up
- * @param lightUpNext - 0 <= lightUp <= 1 (intensity)
+ * @param animation - animation entry (led which should be light up; lightUp - 0 <= lightUp <= 1 (intensity); ledNext - nextLed which should be light up;lightUpNext - 0 <= lightUp <= 1 (intensity)
  */
-static void calcLED(uint32_t totalAnimationSteps, uint32_t relPosition, uint16_t *led, float *lightUp, uint16_t *ledNext,  float *lightUpNext){
+static void calcLED(uint32_t totalAnimationSteps, uint32_t relPosition, ANIM_LED_t* animation){
     // calculate degree, if one roations consists of anisteps
     float deg = (360.0 * relPosition) / totalAnimationSteps;
     deg = ((deg >= 360) ? (deg - 360.0) : deg);
@@ -143,75 +165,75 @@ static void calcLED(uint32_t totalAnimationSteps, uint32_t relPosition, uint16_t
     float dst = 360.0 / LED;
 
     // calculate indize of leds
-    *led = (uint32_t) deg/dst;
-    *led = *led % LED;
-    *ledNext = (*led + 1) % LED;
+    animation->led = (uint32_t) deg/dst;
+    animation->led = animation->led % LED;
+    animation->ledNext = (animation->led + 1) % LED;
 
     // ligh up value
-    *lightUp = 1-(deg/dst - *led);
-    *lightUpNext = 1- *lightUp;
+    animation->lightUpLED = 1-(deg/dst - animation->led);
+    animation->lightUpLEDNext = 1 - animation->lightUpLED;
 }
 
 
-static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond){
+static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t seconds, uint16_t posInSecond){
     uint32_t aniSteps = RATE_MIN;
     uint32_t clk = seconds * UPDATE_RATE_SEC + posInSecond;
 
-    // calculate indize of leds
-    uint16_t led, ledNext;
-    // ligh up value
-    float lightUpLED, lightUpLEDNext;
 
-    calcLED(aniSteps, clk, &led, &lightUpLED, &ledNext, &lightUpLEDNext);
+    // Sekundenanimation
+    ANIM_LED_t secondAnimation;
+    calcLED(aniSteps, clk, &secondAnimation);
+
+    // Minuten-Darstellung
+    ANIM_LED_t minutesAnimation;
+    aniSteps = RATE_MIN * 60;
+    //clk = minutes * RATE_MIN + seconds * UPDATE_RATE_SEC + posInSecond;
+    clk = minutes * RATE_MIN + clk;
+    calcLED(aniSteps, clk, &minutesAnimation);
+
+    // Stundenanimation
+    ANIM_LED_t hoursAnimation;
+    aniSteps = RATE_MIN * 60 * 12; // 12 hours display
+    clk = (hours % 12) * RATE_MIN * 60 * 12 + clk;
+    calcLED(aniSteps, clk, &hoursAnimation);
 
 
     // now set output
     for(uint32_t i = 0; i < LED; i++){
         hsvStripe[i].s = 100;
-        hsvStripe[i].h = 250;
+        hsvStripe[i].h = 100;
         hsvStripe[i].v = 0;
     }
 
     // not set lightup
-    hsvStripe[led].v = 100.0 * lightUpLED;
-    hsvStripe[ledNext].v = 100.0 * lightUpLEDNext;
+    hsvStripe[secondAnimation.led].v = 40.0 * secondAnimation.lightUpLED;
+    hsvStripe[secondAnimation.ledNext].v = 40.0 * secondAnimation.lightUpLEDNext;
+
+
+    // minutes
+    hsvStripe[minutesAnimation.led].h = 300;
+    hsvStripe[minutesAnimation.ledNext].h = 300;
+    hsvStripe[minutesAnimation.led].v = 40.0 * minutesAnimation.lightUpLED;
+    hsvStripe[minutesAnimation.ledNext].v = 40.0 * minutesAnimation.lightUpLEDNext;
+
+    // hours
+    hsvStripe[hoursAnimation.led].h = 200;
+    hsvStripe[hoursAnimation.ledNext].h = 200;
+    hsvStripe[hoursAnimation.led].v = 40.0 * hoursAnimation.lightUpLED;
+    hsvStripe[hoursAnimation.ledNext].v = 40.0 * hoursAnimation.lightUpLEDNext;
+
+
+
+    //hsvStripe[led].v = 40.0 * lightUpLED;
+    //hsvStripe[ledNext].v = 40.0 * lightUpLEDNext;
+
 
     // now convert to rgb value
     for(uint32_t i = 0; i < LED; i++){
         rgbStripe[i] = convertHSV2RGB(&hsvStripe[i]);
     }
 
-//    for(uint32_t i = 0; i < LED; i++){
-//        rgbStripe[i].blue = 0;
-//        rgbStripe[i].green = 0;
-//        rgbStripe[i].red = 0;
-//    }
-
-
-//    lightUpLED  = 1.0;
-//    lightUpLEDNext = 1.0;
-
-//    rgbStripe[led].green = 255.0 * lightUpLED;
-//    rgbStripe[led].red = 0 * lightUpLED;
-//    rgbStripe[led].blue = 0 * lightUpLED;
-
-
-
-
-//    rgbStripe[ledNext].green = 255.0 * lightUpLEDNext;
-//    rgbStripe[ledNext].red = 255.0 * lightUpLEDNext;
-//    rgbStripe[ledNext].blue = 0 * lightUpLEDNext;
-
-
-
-//    rgbStripe[2].green = 120;
-//    rgbStripe[2].red = 120.0;
-//    rgbStripe[2].blue = 120;
-
-
-//    rgbStripe[50].red = 120.0;
 
     // no draw the fuck hahahahahaha
-    //WS2812_clear();
     WS2812_send(rgbStripe, LED);
 }
