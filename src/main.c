@@ -38,13 +38,13 @@ int main(void) {
 
     UART_SendString("STM32F103WS2812 says hello\n\0");
 
-    WS2812_Init();
+    //WS2812_Init();
 
     //WS2812_clear();
 
     Delay(5000000L);
 
-   //Animator_Init();
+   Animator_Init();
 
 
     while(1){
@@ -69,7 +69,7 @@ int main(void) {
 
             //WS2812_Init();
 
-            WS2812_send(stripe, LED);
+   //         WS2812_send(stripe, LED);
 
 
             Delay(7500000L);

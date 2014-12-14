@@ -34,7 +34,6 @@ void Animator_Init(){
     // start WS2812
     WS2812_Init();
     WS2812_clear();
-    WS2812_clear();
 
 
     // Timer configuration
@@ -95,7 +94,7 @@ void TIM4_IRQHandler(void){
     if(TIM_GetITStatus(TIM4, TIM_IT_CC1) == SET){
         // clear IRQ Status
         TIM_ClearITPendingBit(TIM4, TIM_IT_CC1);
-        NVIC_ClearPendingIRQ(TIM2_IRQn);
+        NVIC_ClearPendingIRQ(TIM4_IRQn);
 
         // now increment local loop counter and modify local
         // time on second increment
@@ -108,7 +107,7 @@ void TIM4_IRQHandler(void){
         if(loops % UPDATE_RATE_SEC == 0){
             seconds++;
             seconds = seconds % 60;
-            UART_SendString("S\n\0");
+            //UART_SendString("S\n\0");
         }
 
         // update timer compare register and update duration of current cycle /second in ticks
@@ -116,9 +115,6 @@ void TIM4_IRQHandler(void){
 
         // update visualization of clock
         updateVisualization(seconds, (loops % UPDATE_RATE_SEC), UPDATE_RATE_SEC);
-        // clear IRQ Status
-        TIM_ClearITPendingBit(TIM4, TIM_IT_CC1);
-        NVIC_ClearPendingIRQ(TIM2_IRQn);
     }
 }
 
@@ -140,47 +136,59 @@ static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t
     // calculate indize of leds
     uint32_t led = (uint32_t) deg/dst;
     led = led % LED;
-    uint32_t ledNext = (led +1) % LED;
+    uint32_t ledNext = (led + 1) % LED;
 
     // ligh up value
     float lightUpLED = 1-(deg/dst - led);
     float lightUpLEDNext = 1- lightUpLED;
 
-//    // now set output
-//    for(uint32_t i = 0; i < LED; i++){
-//        hsvStripe[i].s = 100;
-//        hsvStripe[i].h = 250;
-//        hsvStripe[i].v = 0;
-//    }
-
-//    // not set lightup
-//    hsvStripe[led].v = 100.0 * lightUpLED;
-//    hsvStripe[ledNext].v = 100.0 * lightUpLEDNext;
-
-//    // now convert to rgb value
-//    for(uint32_t i = 0; i < LED; i++){
-//        rgbStripe[i] = convertHSV2RGB(&hsvStripe[i]);
-//    }
-
+    // now set output
     for(uint32_t i = 0; i < LED; i++){
-        rgbStripe[i].blue = 0;
-        rgbStripe[i].green = 0;
-        rgbStripe[i].red = 0;
+        hsvStripe[i].s = 100;
+        hsvStripe[i].h = 250;
+        hsvStripe[i].v = 0;
     }
 
+    // not set lightup
+    hsvStripe[led].v = 100.0 * lightUpLED;
+    hsvStripe[ledNext].v = 100.0 * lightUpLEDNext;
 
-    //lightUpLED  = 1.0;
-    //lightUpLEDNext = 1.0;
+    // now convert to rgb value
+    for(uint32_t i = 0; i < LED; i++){
+        rgbStripe[i] = convertHSV2RGB(&hsvStripe[i]);
+    }
 
-    rgbStripe[led].green = 255.0 * lightUpLED;
-    rgbStripe[led].red = 0 * lightUpLED;
-    rgbStripe[led].blue = 0 * lightUpLED;
+//    for(uint32_t i = 0; i < LED; i++){
+//        rgbStripe[i].blue = 0;
+//        rgbStripe[i].green = 0;
+//        rgbStripe[i].red = 0;
+//    }
+
+
+//    lightUpLED  = 1.0;
+//    lightUpLEDNext = 1.0;
+
+//    rgbStripe[led].green = 255.0 * lightUpLED;
+//    rgbStripe[led].red = 0 * lightUpLED;
+//    rgbStripe[led].blue = 0 * lightUpLED;
+
+
+
 
 //    rgbStripe[ledNext].green = 255.0 * lightUpLEDNext;
-//    rgbStripe[ledNext].red = 0 * lightUpLEDNext;
+//    rgbStripe[ledNext].red = 255.0 * lightUpLEDNext;
 //    rgbStripe[ledNext].blue = 0 * lightUpLEDNext;
 
 
+
+//    rgbStripe[2].green = 120;
+//    rgbStripe[2].red = 120.0;
+//    rgbStripe[2].blue = 120;
+
+
+//    rgbStripe[50].red = 120.0;
+
     // no draw the fuck hahahahahaha
+    //WS2812_clear();
     WS2812_send(rgbStripe, LED);
 }
