@@ -29,9 +29,9 @@
 
 // macrotick counter
 static volatile uint16_t loops = 0;
-static volatile uint16_t seconds = 0;
-static volatile uint16_t minutes = 0;
-static volatile uint16_t hours = 0;
+static volatile uint8_t seconds = 0;
+static volatile uint8_t minutes = 0;
+static volatile uint8_t hours = 0;
 
 /**
  * data structure for animation (2 leds + brightness)
