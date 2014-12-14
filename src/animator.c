@@ -118,13 +118,22 @@ void TIM4_IRQHandler(void){
     }
 }
 
-
-static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond){
-    uint32_t aniSteps = RATE_MIN;
-    uint32_t clk = seconds * UPDATE_RATE_SEC + posInSecond;
-
-    // degree if one roations consists of anisteps
-    float deg = (360.0 * clk) / aniSteps;
+/**
+ * @brief calcLED
+ * Calculate which LED in ring should be light up. Therefore, totalAnimationSteps is the number of executions of this method,
+ * upon the LED should move arround the whole ring. 0<= relPosition < totalAnimationSteps encodes the current position within
+ * the ring.
+ *
+ * @param totalAnimationSteps - number of animationsteps until LED should surround the ring
+ * @param relPosition -  position within ring 0<= relPosition < totalAnimationSteps
+ * @param led - led which should be light up
+ * @param lightUp - 0 <= lightUp <= 1 (intensity)
+ * @param ledNext - nextLed which should be light up
+ * @param lightUpNext - 0 <= lightUp <= 1 (intensity)
+ */
+static void calcLED(uint32_t totalAnimationSteps, uint32_t relPosition, uint16_t *led, float *lightUp, uint16_t *ledNext,  float *lightUpNext){
+    // calculate degree, if one roations consists of anisteps
+    float deg = (360.0 * relPosition) / totalAnimationSteps;
     deg = ((deg >= 360) ? (deg - 360.0) : deg);
 
     // degree per LED
@@ -134,13 +143,27 @@ static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t
     float dst = 360.0 / LED;
 
     // calculate indize of leds
-    uint32_t led = (uint32_t) deg/dst;
-    led = led % LED;
-    uint32_t ledNext = (led + 1) % LED;
+    *led = (uint32_t) deg/dst;
+    *led = *led % LED;
+    *ledNext = (*led + 1) % LED;
 
     // ligh up value
-    float lightUpLED = 1-(deg/dst - led);
-    float lightUpLEDNext = 1- lightUpLED;
+    *lightUp = 1-(deg/dst - *led);
+    *lightUpNext = 1- *lightUp;
+}
+
+
+static void updateVisualization(uint16_t seconds, uint16_t posInSecond, uint16_t animationStepsPerSecond){
+    uint32_t aniSteps = RATE_MIN;
+    uint32_t clk = seconds * UPDATE_RATE_SEC + posInSecond;
+
+    // calculate indize of leds
+    uint16_t led, ledNext;
+    // ligh up value
+    float lightUpLED, lightUpLEDNext;
+
+    calcLED(aniSteps, clk, &led, &lightUpLED, &ledNext, &lightUpLEDNext);
+
 
     // now set output
     for(uint32_t i = 0; i < LED; i++){
