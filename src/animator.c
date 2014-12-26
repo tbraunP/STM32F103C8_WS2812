@@ -11,9 +11,9 @@
 
 
 // CONSTANTS
-#define     UPDATE_RATE_SEC         (25)
+#define     UPDATE_RATE_SEC         (25*2)
 #define     RATE_MIN                (60*UPDATE_RATE_SEC)
-#define     PRESCALER               (uint16_t) (0x2C1E)
+#define     PRESCALER               (uint16_t) (0x2C1E/2)
 #define     COUNTERVALUE40MS        (uint16_t) (0xFF)
 #define     COUNTERVALUE40MS_2      (uint16_t) (COUNTERVALUE40MS/2)
 
@@ -281,29 +281,8 @@ static void updateVisualization(uint16_t hours, uint16_t minutes, uint16_t secon
         hsvStripe[i].v = 0;
     }
 
-//    // not set lightup
-//    hsvStripe[secondAnimation.led].h = BASECOLOR_SECONDS;
-//    hsvStripe[secondAnimation.ledNext].h = BASECOLOR_SECONDS;
-//    hsvStripe[secondAnimation.led].v = MAX_BRIGHTNESS * secondAnimation.lightUpLED;
-//    hsvStripe[secondAnimation.ledNext].v = MAX_BRIGHTNESS * secondAnimation.lightUpLEDNext;
-
-
-//    // minutes
-//    hsvStripe[minutesAnimation.led].h = BASECOLOR_MINUTES;
-//    hsvStripe[minutesAnimation.ledNext].h = BASECOLOR_MINUTES;
-//    hsvStripe[minutesAnimation.led].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLED;
-//    hsvStripe[minutesAnimation.ledNext].v = MAX_BRIGHTNESS * minutesAnimation.lightUpLEDNext;
-
-//    // hours
-//    hsvStripe[hoursAnimation.led].h = BASECOLOR_HOURS;
-//    hsvStripe[hoursAnimation.ledNext].h = BASECOLOR_HOURS;
-//    hsvStripe[hoursAnimation.led].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLED;
-//    hsvStripe[hoursAnimation.ledNext].v = MAX_BRIGHTNESS * hoursAnimation.lightUpLEDNext;
-
-
+    // merge colors
     mergeColors(&hoursAnimation, &minutesAnimation, &secondAnimation);
-
-
 
     // now convert to rgb value
     for(uint32_t i = 0; i < LED; i++){
